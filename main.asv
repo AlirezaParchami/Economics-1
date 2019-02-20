@@ -45,9 +45,7 @@ for L = L_array
     P_E = 1 - power( vpa(0.5) , q );
     P_F = 1 - P_E;
     entry = [entry, P, P_E, P_F];
-%     P_h
-%     P_l
-%     q
+
     N = size(t, 1)
     if isequal( (1 + P_h - L*g) , 0 )
         disp("1")
@@ -59,30 +57,26 @@ for L = L_array
         disp("3..")
         n0 = ((q - N) * log(1 - L * P_l - L * g) - q * log(1 + P_h - L * g)) / ( log(1 + L * P_l - L * g) - log(1 - L * P_l - L * g) );
     end
-%     1 - L * P_l - L * g
-%     1 + P_h - L * g
-%     1 + L * P_l - L * g
-%     1 - L * P_l - L * g
-%     n0
+
     n0 = floor(n0);
     P_loss_E = 1;
     P_loss_F = 0;
     for i = 0:n0
-%         nchoosek(N-q , n0)
-%         power(0.5 , N-q)
         P_loss_F = vpa( P_loss_F + (nchoosek(N-q , i) * power(0.5 , N-q)) );
-%         fprintf('i= %d     P_Loss_F = %f \n' , i , P_loss_F)
     end
-    
     P_loss = (P_E * P_loss_E) + (P_F * P_loss_F);
     entry = [entry , n0 , P_loss_E , P_loss_F , P_loss];
     t2 = [t2;entry];
-    
-% P
-% P_h
-% P_l
-% n0
 disp('---------------------------------------------')
 end
+% t2(Leverage, g, q, P, P_E, P_F, n0, P_loss_E , P_loss_F , P_loss)
 t2
+leverage_plot = t2(:,1);
+P_loss_plot = t2(:,size(t2,2));
+figure()
+plot(leverage_plot, P_loss_plot)
 
+t_plot = 1:size(t,1);
+volatility_plot = t.Pt;
+figure(2)
+plot(t_plot, volatility_plot)
