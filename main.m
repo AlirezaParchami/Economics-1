@@ -30,7 +30,6 @@ for L = L_array
     
     P = mean(t.abs_Pt);
     P_h = mean(q_h);
-%%%% here
     if isequal( size(q_h,1) , 0)
         P_h = 0;
     end
@@ -43,17 +42,6 @@ for L = L_array
     entry = [entry, P, P_E, P_F];
 
     N = size(t, 1);
-%     L*g
-%     q_h
-%     [(1:size(q_l,1))' q_l]
-%     P_h
-%     P_l
-%     1 - L * P_l - L * g
-%     1 + P_h - L * g
-%     1 + L * P_l - L * g
-%     1 - L * P_l - L * g
-%     ((q - N) * log(1 - L * P_l - L * g) - q * log(1 + P_h - L * g))
-%     ( log(1 + L * P_l - L * g) - log(1 - L * P_l - L * g) )
     if isequal( (1 + P_h - L*g) , 0 )
         n0 = ((q - N)*log(1 - L * P_l - L * g)) / ( log(1 + L * P_l - L * g) - log(1 - L * P_l - L * g) );
     elseif isequal( (1 - L * P_l - L * g) , 0 )
@@ -80,6 +68,8 @@ for L = L_array
     t2 = [t2;entry];
 disp('---------------------------------------------')
 end
-disp('t2(Leverage, g, q, P, P_E, P_F, P_h, P_l, n0, P_loss_E , P_loss_F , P_loss)')
-t2
+t4 = {'Leverage' 'g' 'q' 'P' 'P_E' 'P_F' 'P_h' 'P_l' 'n_0' 'P_loss_E' 'P_loss_F' 'P_loss'}
+t5 = [t4;t2];
+%xlswrite('D:\University Cources\Term 8\Projects\Economics-1\Results\EUR_to_Yen.xls', t5 )
+t5
 draw_plots(t, t2)
