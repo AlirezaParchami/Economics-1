@@ -23,7 +23,8 @@ for L = L_array
     eq17_values = L * (t.abs_Pt + g);
     
     q_h = t.abs_Pt(find(eq17_values >= 1));
-    q_l = setdiff(t.abs_Pt , q_h, 'stable');
+    %q_l = setdiff(t.abs_Pt , q_h, 'stable');
+    q_l = t.abs_Pt(~ismember(t.abs_Pt, q_h));
     q = size( q_h , 1 );
     entry = [entry, q];
     
