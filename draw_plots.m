@@ -10,5 +10,5 @@ t_plot = 1:size(t,1);
 volatility_plot = t.Pt;
 figure('Name','Volatility')
 plot(t_plot, volatility_plot)
-xlabel('Time')
+xlabel('t')
 ylabel('Volatility')

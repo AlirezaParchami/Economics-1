@@ -1,5 +1,5 @@
 % Read File
-t = readtable('D:\University Cources\Term 8\Projects\Economics-1\Exchange Rate\EUR_to_Yen_June1_to_January1.xlsx');
+t = readtable('D:\University Cources\Term 8\Projects\Economics-1\Exchange Rate\USD_to_EUR_June1_to_January1.xlsx');
 t.Properties.VariableNames = {'date' 'exchange'};
 t.exchange = str2double(t.exchange);
 digits(6)
@@ -42,12 +42,12 @@ for L = L_array
     entry = [entry, P, P_E, P_F];
 
     N = size(t, 1);
-    if isequal( (1 + P_h - L*g) , 0 )
+    if isequal( (1 + L * P_h - L*g) , 0 )
         n0 = ((q - N)*log(1 - L * P_l - L * g)) / ( log(1 + L * P_l - L * g) - log(1 - L * P_l - L * g) );
     elseif isequal( (1 - L * P_l - L * g) , 0 )
-        n0 = -q * log(1 + P_h - L * g) / ( log(1 + L * P_l - L * g) - log(1 - L * P_l - L * g) );
+        n0 = -q * log(1 + L * P_h - L * g) / ( log(1 + L * P_l - L * g) - log(1 - L * P_l - L * g) );
     else
-        n0 = ((q - N) * log(1 - L * P_l - L * g) - q * log(1 + P_h - L * g)) / ( log(1 + L * P_l - L * g) - log(1 - L * P_l - L * g) );
+        n0 = ((q - N) * log(1 - L * P_l - L * g) - q * log(1 + L * P_h - L * g)) / ( log(1 + L * P_l - L * g) - log(1 - L * P_l - L * g) );
     end
 
     n0 = floor(n0);
